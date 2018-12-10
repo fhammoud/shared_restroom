@@ -53,7 +53,7 @@ int main()
 	int tids[FCOUNT + MCOUNT];
 	pthread_t pthreadids[FCOUNT + MCOUNT];
 
-	srandom(time(NULL) % (unsigned int)RAND_MAX);
+	srand(time(NULL) % (time_t)RAND_MAX);
 
 	pthread_attr_init(&attribs);
 	for (i = 0; i < FCOUNT; i++)
@@ -188,7 +188,7 @@ void use_rr()
 {
 	struct timespec req, rem;
 	double usetime;
-	usetime = RR_MAXSLEEP * (random() / (1.0*(double)((unsigned long)RAND_MAX)));
+	usetime = RR_MAXSLEEP * (rand() / (1.0*(double)((unsigned long)RAND_MAX)));
 	req.tv_sec = (int)floor(usetime);
 	req.tv_nsec = (unsigned int)((usetime - (int)floor(usetime)) * 1000000000);
 	printf("Thread %d using restroom for %lf time\n", get_simple_tid(pthread_self()), usetime);
@@ -200,7 +200,7 @@ void do_other_stuff()
 {
 	struct timespec req, rem;
 	double worktime;
-	worktime = OTHER_SLEEP * (random() / (1.0*(double)((unsigned long)RAND_MAX)));
+	worktime = OTHER_SLEEP * (rand() / (1.0*(double)((unsigned long)RAND_MAX)));
 	req.tv_sec = (int)floor(worktime);
 	req.tv_nsec = (unsigned int)((worktime - (int)floor(worktime)) * 1000000000);
 	printf("Thread %d working for %lf time\n", get_simple_tid(pthread_self()), worktime);

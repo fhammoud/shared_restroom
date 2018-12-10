@@ -75,11 +75,20 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>-pthread</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>m</LibraryDependencies>
+      <AdditionalDependencies>$(StlAdditionalDependencies);%(Link.AdditionalDependencies);-pthread</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>
